@@ -1,0 +1,36 @@
+import random
+answer = []
+
+while len(answer) < 3:
+    n = random.randint(0, 9)
+    if n not in answer:
+        answer.append(n)
+
+print(f"answer = {answer}")
+
+try_count = 10
+while try_count:
+    guess = input("숫자를 입력해주세요(ex: 0 1 2): ").split()
+    for i in range(len(guess)):
+        guess[i] = int(guess[i])
+    if guess == answer:
+        print("정답입니다!")
+        exit()
+    Ball = 0
+    Strike = 0
+    for i in range(len(guess)):
+        guess[i] = int(guess[i])
+        if guess[i] in answer:
+            if guess[i] == answer[i]:
+                Strike += 1
+            else:
+                Ball += 1
+    if Ball == 0 and Strike == 0:
+        print("Foul")
+    else:
+        print(f"Ball = {Ball}, Strike = {Strike}")
+    try_count -= 1
+    print(f"남은 시도 = {try_count}")
+    if try_count == 0:
+        print("시도 횟수를 모두 소진했습니다.")
+        print(f"정답은: {answer}")
